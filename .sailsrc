@@ -8,6 +8,7 @@
   },
   "hooks": {
     "views": false,
-    "security": false
+    "security": false,
+    "session": false
   }
 }
