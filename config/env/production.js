@@ -40,6 +40,8 @@ module.exports = {
   },
 
   blueprints: {
+    actions: false,
+    rest: true,
     shortcuts: false,
   },
 
@@ -90,8 +92,7 @@ module.exports = {
   // ssl: undefined,
 
   custom: {
-    baseUrl: 'https://example.com',
-    internalEmailAddress: 'support@example.com',
+    jwtKey: process.env.JWT_KEY,
   },
 
 };
