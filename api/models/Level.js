@@ -16,6 +16,16 @@ module.exports = {
     shortName: {
       type: 'string',
       required: true,
+    },
+    withSpecialty: {
+      type: 'string',
+      required: true,
+      isIn: ['si', 'no'],
+    },
+    typeSection: {
+      type: 'string',
+      required: true,
+      isIn: ['alphabetic', 'numeric']
     }
 
   },

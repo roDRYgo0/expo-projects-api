@@ -17,6 +17,9 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': 'isAuthenticated',
+  '*': 'isAuthenticated',
+
+  'entrance/*': true,
+  'project-filter/*': true,
 
 };

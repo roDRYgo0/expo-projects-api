@@ -10,14 +10,28 @@
 
 module.exports.custom = {
 
+  /**************************************************************************
+   *                                                                         *
+  * The TTL (time-to-live) for various sorts of tokens before they expire.  *
+  *                                                                         *
+  **************************************************************************/
+  passwordResetTokenTTL: 24*60*60*1000,// 24 hours
+  emailProofTokenTTL:    24*60*60*1000,// 24 hours
+
+  //Extension for email the students
+  extensionEmailStudents: '@ricaldone.edu.sv',
+
   /***************************************************************************
   *                                                                          *
   * Any other custom config this Sails app should use during development.    *
   *                                                                          *
   ***************************************************************************/
-  // mailgunDomain: 'transactional-mail.example.com',
-  // mailgunSecret: 'key-testkeyb183848139913858e8abd9a3',
-  // stripeSecret: 'sk_test_Zzd814nldl91104qor5911gjald',
+
+  // Whether to require proof of email address ownership any time a new user
+  // signs up, or when an existing user attempts to change their email address.
+  verifyEmailAddresses: false,
+
+  // This key is only use in develpment
   jwtKey: 'jsalrjaseji9qwejeji90asdmfi90asdj0asdjfi90adsjasdjasdjfi0awrjifawrfq',
 
 };

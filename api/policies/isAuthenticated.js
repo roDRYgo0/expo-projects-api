@@ -1,6 +1,6 @@
 module.exports = async function (req, res, next) {
 
-  sails.helpers.verifyJwt.with({
+  await sails.helpers.verifyJwt.with({
     req: req,
     res: res
   })

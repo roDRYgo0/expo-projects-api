@@ -19,7 +19,6 @@ module.exports = {
     },
     observations: {
       type: 'string',
-      required: true,
     },
     description: {
       type: 'string',
@@ -31,7 +30,8 @@ module.exports = {
       isIn: ['confirmed', 'unconfirmed', 'canceled'],
     },
     grade: {
-      model: 'grade'
+      model: 'grade',
+      required: true,
     },
     student: {
       collection:'student',

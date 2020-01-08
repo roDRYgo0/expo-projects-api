@@ -1,5 +1,5 @@
 /**
- * Student.js
+ * Admin.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -13,11 +13,6 @@ module.exports = {
       type: 'string',
       required: true,
     },
-    carnet: {
-      type: 'number',
-      required: true,
-      unique: true,
-    },
     email: {
       type: 'string',
       required: true,
@@ -30,9 +25,8 @@ module.exports = {
       required: true,
       protect: true,
     },
-    project: {
-      model: 'project',
-      required: true,
+    grade: {
+      model: 'grade',
     },
     emailStatus: {
       type: 'string',

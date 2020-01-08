@@ -92,7 +92,8 @@ module.exports = {
   // ssl: undefined,
 
   custom: {
-    jwtKey: process.env.JWT_KEY,
+    // sails_custom__jwtKey
+    // verifyEmailAddresses: true,
   },
 
 };

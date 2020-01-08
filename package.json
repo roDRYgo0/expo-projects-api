@@ -11,6 +11,7 @@
     "cross-env": "^6.0.3",
     "jsonwebtoken": "^8.5.1",
     "sails": "^1.2.3",
+    "sails-hook-organics": "^1.0.0",
     "sails-hook-orm": "^2.1.1",
     "sails-hook-sockets": "^2.0.0",
     "sails-postgresql": "^1.0.2"

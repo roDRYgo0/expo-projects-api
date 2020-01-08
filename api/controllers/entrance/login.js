@@ -21,14 +21,37 @@ module.exports = {
 
 
   exits: {
+    success: {
+      description: 'The requesting user agent has been successfully logged in.',
+    },
 
+    badCombo: {
+      description: `The provided email and password combination does not
+      match any user in the database.`,
+      responseType: 'unauthorized',
+    }
   },
 
 
   fn: async function (inputs) {
 
-    // All done.
-    return;
+    let user = await Student.findOne({
+      email: inputs.email.toLowerCase(),
+    });
+
+    if (!user) {
+      throw 'badCombo';
+    }
+
+    await sails.helpers.passwords.checkPassword(inputs.password, user.password)
+      .intercept('incorrect', 'badCombo');
+
+    let token = await sails.helpers.createJwt.with({ user });
+
+    return {
+      ...user,
+      token
+    };
 
   }
 

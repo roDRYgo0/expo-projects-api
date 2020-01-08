@@ -11,7 +11,13 @@ module.exports = {
 
     name: {
       type: 'string',
+      unique: true,
       required: true,
+    },
+    type: {
+      type: 'string',
+      required: true,
+      isIn: ['alphabetic', 'numeric']
     }
 
   },
