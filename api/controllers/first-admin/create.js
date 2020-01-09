@@ -4,7 +4,7 @@ module.exports = {
   friendlyName: 'Create',
 
 
-  description: 'Create admin.',
+  description: 'Create first admin.',
 
 
   inputs: {
@@ -22,9 +22,6 @@ module.exports = {
       type: 'string',
       maxLength: 200,
     },
-    grade: {
-      type: 'string',
-    }
   },
 
 
@@ -37,27 +34,24 @@ module.exports = {
       responseType: 'badRequest',
       description: 'The provided fullName, password and/or email address are invalid.',
     },
-
-    emailAlreadyInUse: {
-      statusCode: 409,
-      description: 'The provided email address is already in use.',
-    },
   },
 
 
   fn: async function (inputs) {
 
-    let admin = await Admin.create({
+    let admins = await Admin.find();
+
+    if (admins.length) {
+      return this.res.unauthorized();
+    }
+
+    await Admin.create({
       fullName: inputs.fullName,
       email: inputs.email,
       password: await sails.helpers.passwords.hashPassword(inputs.password),
-      grade: inputs.grade || null,
+      grade: null,
     })
-    .intercept('E_UNIQUE', 'emailAlreadyInUse')
-    .intercept({name: 'UsageError'}, 'invalid')
-    .fetch();
-
-    return admin;
+    .intercept({name: 'UsageError'}, 'invalid');
 
   }
 

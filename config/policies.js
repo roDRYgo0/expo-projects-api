@@ -19,7 +19,21 @@ module.exports.policies = {
 
   '*': 'isAuthenticated',
 
+  'admin/*': 'isAdmin',
+  'level/*': 'isAdmin',
+  'section/*': 'isAdmin',
+  'specialty/*': 'isAdmin',
+
+  GradeController: {
+    find: 'isTeacher',
+    findOne: 'isTeacher',
+    create: 'isAdmin',
+    update: 'isAdmin',
+    destroy: 'isAdmin',
+  },
+
   'entrance/*': true,
   'project-filter/*': true,
+  'first-admin/*': true,
 
 };

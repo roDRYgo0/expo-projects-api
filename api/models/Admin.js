@@ -25,13 +25,13 @@ module.exports = {
       required: true,
       protect: true,
     },
+    controlAccess: {
+      type: 'string',
+      isIn: ['si', 'request', 'no'],
+      defaultsTo: 'no',
+    },
     grade: {
       model: 'grade',
-    },
-    emailStatus: {
-      type: 'string',
-      isIn: ['unconfirmed', 'change-requested', 'confirmed'],
-      defaultsTo: 'confirmed',
     },
     passwordResetToken: {
       type: 'string',

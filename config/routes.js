@@ -15,7 +15,10 @@ module.exports.routes = {
 
   'POST  /login':                       { action: 'entrance/login' },
   'POST /signup':                       { action: 'entrance/signup' },
-  'GET /profile':                       { action: 'profile' },
+  'GET /profile/':                       { action: 'profile' },
+
+  'GET /firstAdmin/':                       { action: 'first-admin/find' },
+  'POST /firstAdmin/':                       { action: 'first-admin/create' },
 
   'GET /filter/getFilters':                       { action: 'project-filter/filters' },
   'POST /filter/getProjects':                       { action: 'project-filter/projects' },

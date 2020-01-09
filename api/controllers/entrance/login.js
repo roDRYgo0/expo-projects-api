@@ -35,24 +35,39 @@ module.exports = {
 
   fn: async function (inputs) {
 
-    let user = await Student.findOne({
+    let user = null;
+
+    let student = null;
+    let admin = null;
+
+    let rol = '';
+
+    student = await Student.findOne({
       or: [
         { email: inputs.username.toLowerCase() },
         { carnet: inputs.username }
       ]
     });
 
-    if (!user) {
+    admin = await Admin.findOne({
+      email: inputs.username.toLowerCase(),
+    });
+
+    if (!student && !admin) {
       throw 'badCombo';
     }
+
+    user = student || admin;
+    rol = student ? 'student' : admin.grade ? 'teacher' : 'admin';
 
     await sails.helpers.passwords.checkPassword(inputs.password, user.password)
       .intercept('incorrect', 'badCombo');
 
-    let token = await sails.helpers.createJwt.with({ user });
+    let token = await sails.helpers.createJwt.with({ user, rol });
 
     return {
       ...user,
+      rol,
       token
     };
 

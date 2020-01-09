@@ -43,22 +43,12 @@ module.exports = {
         if (err || !payload.id) {
           return exits.invalid();
         }
-        var user = await Student.findOne(payload.id);
 
-        if (!user) {
-          return exits.invalid();
-        }
+        req.me = payload.id;
+        req.rol = payload.rol;
 
-        if (user.project) {
-          user.project = await Project.findOne(user.project);
+        return exits.success({ rol: payload.rol });
 
-          if (user.project.grade) {
-            user.project.grade = await Grade.findOne(user.project.grade);
-          }
-        }
-
-        req.me = user;
-        return exits.success(user);
       });
     }
     return exits.invalid();

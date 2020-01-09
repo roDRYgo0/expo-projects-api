@@ -11,8 +11,13 @@ module.exports = {
 
   inputs: {
     user: {
-      description: 'Objeto de usuario que contiene todas las propiedades.',
+      description: 'User object that with contains all properties.',
       type: 'ref',
+      required: true,
+    },
+    rol: {
+      description: 'User rol',
+      type: 'string',
       required: true,
     }
   },
@@ -31,7 +36,8 @@ module.exports = {
     let user = inputs.user;
     let token = await jwt.sign({
       id: user.id,
-      email: user.email
+      email: user.email,
+      rol: inputs.rol,
     }, sails.config.custom.jwtKey);
     exits.success(token);
   }
