@@ -8,7 +8,7 @@ module.exports = {
 
 
   inputs: {
-    email: {
+    username: {
       type: 'string',
       required: true
     },
@@ -36,7 +36,10 @@ module.exports = {
   fn: async function (inputs) {
 
     let user = await Student.findOne({
-      email: inputs.email.toLowerCase(),
+      or: [
+        { email: inputs.username.toLowerCase() },
+        { carnet: inputs.username }
+      ]
     });
 
     if (!user) {

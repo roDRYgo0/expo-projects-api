@@ -58,8 +58,7 @@ module.exports = {
       emailStatus: 'unconfirmed',
     }:{}))
     .intercept('E_UNIQUE', 'emailAlreadyInUse')
-    .intercept({name: 'UsageError'}, 'invalid')
-    .fetch();
+    .intercept({name: 'UsageError'}, 'invalid');
 
     if (sails.config.custom.verifyEmailAddresses) {
       // Send "confirm account" email

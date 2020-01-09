@@ -15,7 +15,8 @@ module.exports = {
     },
     projectId: {
       type: 'number',
-      required: true
+      required: true,
+      unique: true,
     },
     observations: {
       type: 'string',
