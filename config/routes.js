@@ -17,7 +17,9 @@ module.exports.routes = {
   'POST /signup':                       { action: 'entrance/signup' },
   'GET /profile/':                       { action: 'profile' },
 
-  'GET /firstAdmin/':                       { action: 'first-admin/find', cors: false },
+  'POST /student/changePassword':                       { action: 'student/change-password' },
+
+  'GET /firstAdmin/':                       { action: 'first-admin/find' },
   'POST /firstAdmin/':                       { action: 'first-admin/create' },
 
   'POST /password/email':                       { action: 'password/email' },
