@@ -13,15 +13,13 @@ module.exports = {
   },
 
 
-  fn: async function (inputs, exits) {
+  fn: async function () {
 
     let admins = await Admin.find();
 
     if (admins.length) {
       return this.res.unauthorized();
     }
-
-    return exits.success({message: 'meme'});
 
   }
 

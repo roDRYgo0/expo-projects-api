@@ -33,6 +33,7 @@ module.exports.policies = {
   },
 
   'entrance/*': true,
+  'password/*': true,
   'project-filter/*': true,
   'first-admin/*': true,
 

@@ -10,13 +10,14 @@
 
 module.exports.custom = {
 
+  baseUrl: 'http://localhost:1337',
+
   /**************************************************************************
    *                                                                         *
   * The TTL (time-to-live) for various sorts of tokens before they expire.  *
   *                                                                         *
   **************************************************************************/
   passwordResetTokenTTL: 24*60*60*1000,// 24 hours
-  emailProofTokenTTL:    24*60*60*1000,// 24 hours
 
   //Extension for email the students
   extensionEmailStudents: '@ricaldone.edu.sv',
