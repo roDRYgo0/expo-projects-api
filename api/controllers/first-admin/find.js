@@ -6,14 +6,22 @@ module.exports = {
 
   description: 'Find first admin.',
 
+  exits: {
+    success: {
+      description: 'New student account was created successfully.'
+    },
+  },
 
-  fn: async function () {
+
+  fn: async function (inputs, exits) {
 
     let admins = await Admin.find();
 
     if (admins.length) {
-      this.res.unauthorized();
+      return this.res.unauthorized();
     }
+
+    return exits.success({message: 'meme'});
 
   }
 
