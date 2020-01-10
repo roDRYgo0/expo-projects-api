@@ -76,6 +76,7 @@ module.exports = {
       pass: process.env.sails_email__auth__pass,
     },
     from: process.env.sails_email__from,
+    testMode: false,
   },
 
   custom: {
