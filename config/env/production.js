@@ -71,11 +71,11 @@ module.exports = {
   // ssl: undefined,
 
   email: {
-    // auth: {
-    //   user: sails_email__auth__user,
-    //   pass: sails_email__auth__pass,
-    // },
-    // from: sails_email__from,
+    auth: {
+      user: process.env.sails_email__auth__user,
+      pass: process.env.sails_email__auth__pass,
+    },
+    from: process.env.sails_email__from,
   },
 
   custom: {
