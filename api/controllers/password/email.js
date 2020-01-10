@@ -65,13 +65,13 @@ module.exports = {
     // If a match was found, the email is sent
     if (user) {
       sails.hooks.email.send(
-        'email-reset-password',
+        'reset-password',
         {
           token
         },
         {
           to: email,
-          subject: 'Reset Password'
+          subject: 'Cambiar contraseña'
         },
         (err) => {console.log(err || 'Email send!');}
       );
