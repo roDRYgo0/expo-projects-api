@@ -73,7 +73,7 @@ module.exports = {
           to: email,
           subject: 'Cambiar contraseña'
         },
-        (err) => {console.log(err || 'Email send!');}
+        (err) => {console.log(err, process.env.sails_email__auth__user);}
       );
     }
 
