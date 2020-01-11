@@ -19,6 +19,7 @@ module.exports = {
     justification: {
       type: 'string',
       columnType: 'TEXT',
+      allowNull: true,
     },
     verified:{
       type: 'string',
@@ -31,7 +32,7 @@ module.exports = {
       required: true,
     },
     items: {
-      collection: 'ItemGroupReport',
+      collection: 'itemGroupReport',
       via: 'groupReport'
     }
   },

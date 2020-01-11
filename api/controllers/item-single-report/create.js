@@ -4,18 +4,18 @@ module.exports = {
   friendlyName: 'Create',
 
 
-  description: 'Create group report.',
+  description: 'Create item single report.',
 
 
   inputs: {
-    coordinatorname: {
+    name: {
       type: 'string',
       required: true,
     },
-    guideteacher: {
-      type: 'string',
+    quantity: {
+      type: 'number',
       required: true,
-    }
+    },
   },
 
 
@@ -29,34 +29,33 @@ module.exports = {
       description: 'The provided coordinatorname, and/or guideteacher are invalid.',
     },
 
-    projectAlreadyExist: {
-      statusCode: 409,
-      description: 'The provided project is already exist.',
-    },
-
     unauthorized: {
       responseType: 'unauthorized',
     }
   },
 
 
-  fn: async function ({ coordinatorname, guideteacher }) {
+  fn: async function ({ name, quantity }) {
 
     if (this.req.rol === 'student') {
+      let singleReport = await SingleReport.findOne({student: this.req.me});
 
-      let groupReport = await GroupReport.create({
-        coordinatorname,
-        guideteacher,
-        project: this.req.project,
+      if (!singleReport) {
+        throw 'invalid';
+      }
+
+      let item = await ItemSingleReport.create({
+        name,
+        quantity,
+        singleReport: singleReport.id
       })
-      .intercept('E_UNIQUE', 'projectAlreadyExist')
       .intercept({name: 'UsageError'}, 'invalid')
       .fetch();
 
-      return groupReport;
+      return item;
 
     } else {
-      throw {unauthorized: 'You need to be a student'};
+      throw 'unauthorized';
     }
 
   }

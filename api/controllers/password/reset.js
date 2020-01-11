@@ -48,16 +48,16 @@ module.exports = {
         if (+user.passwordResetToken === +code) {
           await Student.updateOne({id: user.id})
           .set({
-            passwordResetToken: '',
-            passwordResetTokenExpiresAt: 0,
+            passwordResetToken: null,
+            passwordResetTokenExpiresAt: null,
             password: await sails.helpers.passwords.hashPassword(password)
           });
         } else {
-          throw { invalid: ['Código invalido']};
+          throw { invalid: 'Código invalido'};
         }
 
       } else {
-        throw { invalid: ['El código a expirado']};
+        throw { invalid: 'El código a expirado'};
       }
     }
 
@@ -69,21 +69,21 @@ module.exports = {
         if (+user.passwordResetToken === +code) {
           await Admin.updateOne({id: user.id})
           .set({
-            passwordResetToken: '',
-            passwordResetTokenExpiresAt: 0,
+            passwordResetToken: null,
+            passwordResetTokenExpiresAt: null,
             password: await sails.helpers.passwords.hashPassword(password)
           });
         } else {
-          throw { invalid: ['Código invalido']};
+          throw { invalid: 'Código invalido'};
         }
 
       } else {
-        throw { invalid: ['El código a expirado']};
+        throw { invalid: 'El código a expirado'};
       }
     }
 
     else {
-      throw { invalid: ['Invalid rol']};
+      throw { invalid: 'Invalid rol'};
     }
 
   }

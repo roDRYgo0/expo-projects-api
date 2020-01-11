@@ -4,8 +4,7 @@ module.exports = {
   friendlyName: 'My report',
 
 
-  description: 'Get my group report for the token',
-
+  description: '',
 
   exits: {
     unauthorized: {
@@ -22,8 +21,8 @@ module.exports = {
 
     if (this.req.rol === 'student') {
 
-      let report = await GroupReport.findOne({project: this.req.project})
-        .populate('items');
+      let report = await SingleReport.findOne({student: this.req.me})
+      .populate('items');
 
       if (!report) {
         throw 'notFound';

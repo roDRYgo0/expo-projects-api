@@ -12,8 +12,9 @@ module.exports = {
     let user = null;
 
     if (this.req.rol === 'student') {
-      user = await Student.findOne(this.req.me);
-      user.project = await Project.findOne(user.project) || null;
+      user = await Student.findOne(this.req.me)
+      .populate('project')
+      .populate('singleReport');
 
       if (user.project) {
         user.project.grade = await Grade.findOne(user.project.grade) || null;

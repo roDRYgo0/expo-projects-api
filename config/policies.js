@@ -24,7 +24,7 @@ module.exports.policies = {
   'section/*': 'isAdmin',
   'specialty/*': 'isAdmin',
 
-  GradeController: {
+  Grade: {
     find: 'isTeacher',
     findOne: 'isTeacher',
     create: 'isAdmin',
@@ -33,6 +33,12 @@ module.exports.policies = {
   },
 
   GroupReport: {
+    find: 'isAdmin',
+    findOne: 'isAdmin',
+    destroy: 'isAdmin',
+  },
+
+  SingleReport: {
     find: 'isAdmin',
     findOne: 'isAdmin',
     destroy: 'isAdmin',

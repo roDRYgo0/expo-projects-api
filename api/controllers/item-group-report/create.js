@@ -44,6 +44,10 @@ module.exports = {
     if (this.req.rol === 'student' && this.req.project) {
       let groupReport = await GroupReport.findOne({project: this.req.project});
 
+      if (!groupReport) {
+        throw 'invalid';
+      }
+
       let time = (new Date(+entryDatetime)).getTime();
 
       if (isNaN(time)) {

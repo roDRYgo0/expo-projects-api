@@ -35,11 +35,13 @@ module.exports = {
     },
     passwordResetToken: {
       type: 'string',
+      allowNull: true,
       description: 'A unique token used to verify the user\'s identity when recovering a password.  Expires after 1 use, or after a set amount of time has elapsed.'
     },
 
     passwordResetTokenExpiresAt: {
       type: 'number',
+      allowNull: true,
       description: 'A JS timestamp (epoch ms) representing the moment when this user\'s `passwordResetToken` will expire (or 0 if the user currently has no such token).',
       example: 1502844074211
     },
