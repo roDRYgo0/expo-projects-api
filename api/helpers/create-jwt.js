@@ -19,7 +19,12 @@ module.exports = {
       description: 'User rol',
       type: 'string',
       required: true,
-    }
+    },
+    project: {
+      description: 'User project',
+      type: 'string',
+      required: true,
+    },
   },
 
 
@@ -38,6 +43,7 @@ module.exports = {
       id: user.id,
       email: user.email,
       rol: inputs.rol,
+      project: inputs.project,
     }, sails.config.custom.jwtKey);
     exits.success(token);
   }

@@ -32,6 +32,12 @@ module.exports.policies = {
     destroy: 'isAdmin',
   },
 
+  GroupReport: {
+    find: 'isAdmin',
+    findOne: 'isAdmin',
+    destroy: 'isAdmin',
+  },
+
   'entrance/*': true,
   'password/*': true,
   'project-filter/*': true,

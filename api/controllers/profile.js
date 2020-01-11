@@ -17,6 +17,7 @@ module.exports = {
 
       if (user.project) {
         user.project.grade = await Grade.findOne(user.project.grade) || null;
+        user.groupReport = await GroupReport.findOne({project: user.project.id}).populate('items') || null;
       }
     }
 

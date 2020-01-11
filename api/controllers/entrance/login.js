@@ -42,6 +42,8 @@ module.exports = {
 
     let rol = '';
 
+    let project = 'null';
+
     student = await Student.findOne({
       or: [
         { email: inputs.username.toLowerCase() },
@@ -57,13 +59,17 @@ module.exports = {
       throw 'badCombo';
     }
 
+    if (student) {
+      project = student.project || 'null';
+    }
+
     user = student || admin;
     rol = student ? 'student' : admin.grade ? 'teacher' : 'admin';
 
     await sails.helpers.passwords.checkPassword(inputs.password, user.password)
       .intercept('incorrect', 'badCombo');
 
-    let token = await sails.helpers.createJwt.with({ user, rol });
+    let token = await sails.helpers.createJwt.with({ user, rol, project });
 
     return {
       ...user,

@@ -46,6 +46,7 @@ module.exports = {
 
         req.me = payload.id;
         req.rol = payload.rol;
+        req.project = payload.project;
 
         return exits.success({ rol: payload.rol });
 
