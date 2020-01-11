@@ -15,7 +15,7 @@ module.exports.routes = {
 
   'POST  /login':                             { action: 'entrance/login' },
   'POST /signup':                             { action: 'entrance/signup' },
-  'GET /profile/':                            { action: 'profile' },
+  'GET /profile':                            { action: 'profile' },
 
   'POST /student/changePassword':             { action: 'student/change-password' },
 

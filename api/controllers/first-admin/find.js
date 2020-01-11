@@ -8,8 +8,11 @@ module.exports = {
 
   exits: {
     success: {
-      description: 'New student account was created successfully.'
+      statusCode: 204
     },
+    invalid: {
+      statusCode: 200
+    }
   },
 
 
@@ -18,7 +21,7 @@ module.exports = {
     let admins = await Admin.find();
 
     if (admins.length) {
-      return this.res.unauthorized();
+      throw 'invalid';
     }
 
   }

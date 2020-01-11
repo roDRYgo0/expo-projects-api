@@ -16,7 +16,6 @@ module.exports = function unauthorized(optionalData) {
   // Define the status code to send in the response.
   var statusCodeToSet = 401;
 
-  sails.log.info('Ran custom response: res.unauthorized()');
   // If no data was provided, use res.sendStatus().
   if (optionalData === undefined) {
     return res.sendStatus(statusCodeToSet);
