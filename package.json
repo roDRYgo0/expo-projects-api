@@ -8,6 +8,7 @@
     "@sailshq/connect-redis": "^3.2.1",
     "@sailshq/lodash": "^3.10.3",
     "@sailshq/socket.io-redis": "^5.2.0",
+    "btoa": "^1.2.1",
     "cross-env": "^6.0.3",
     "jsonwebtoken": "^8.5.1",
     "randomatic": "^3.1.1",

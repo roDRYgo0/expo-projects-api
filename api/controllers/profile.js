@@ -1,3 +1,6 @@
+const btoa = require('btoa');
+const url = require('url');
+
 module.exports = {
 
 
@@ -20,6 +23,9 @@ module.exports = {
         user.project.grade = await Grade.findOne(user.project.grade) || null;
         user.groupReport = await GroupReport.findOne({project: user.project.id}).populate('items') || null;
       }
+
+      let qr = btoa(`id:${user.id},project:${user.project ? user.project.id : 'null'}`);
+      user.qr =  url.resolve(sails.config.custom.baseUrl,'/set/qr')+'?token='+encodeURIComponent(qr);
     }
 
     else if (this.req.rol === 'teacher') {
