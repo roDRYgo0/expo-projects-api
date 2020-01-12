@@ -25,7 +25,7 @@ module.exports = {
       }
 
       let qr = btoa(`id:${user.id},project:${user.project ? user.project.id : 'null'}`);
-      user.qr =  url.resolve(sails.config.custom.baseUrl,'/set/qr')+'?token='+encodeURIComponent(qr);
+      user.qr =  url.resolve(sails.config.custom.baseUrl,'/set')+'?token='+encodeURIComponent(qr);
     }
 
     else if (this.req.rol === 'teacher') {
