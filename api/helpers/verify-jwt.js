@@ -27,9 +27,7 @@ module.exports = {
     }
   },
 
-  fn: function (inputs, exits) {
-    var req = inputs.req;
-    var res = inputs.res;
+  fn: function ({ req }, exits) {
 
     if (req.header('authorization')) {
       // if one exists, attempt to get the header data
@@ -48,7 +46,7 @@ module.exports = {
         req.rol = payload.rol;
         req.project = payload.project;
 
-        return exits.success({ rol: payload.rol });
+        return exits.success(payload);
 
       });
     }

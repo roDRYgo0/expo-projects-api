@@ -28,7 +28,7 @@ module.exports = {
     state: {
       type: 'string',
       required: true,
-      isIn: ['confirmed', 'unconfirmed', 'canceled'],
+      isIn: ['confirmed', 'canceled'],
     },
     grade: {
       model: 'grade',

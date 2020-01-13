@@ -25,6 +25,10 @@ module.exports = {
       type: 'string',
       required: true,
     },
+    controlAccess: {
+      type: 'string',
+      required: true
+    }
   },
 
 
@@ -37,13 +41,13 @@ module.exports = {
   },
 
 
-  fn: async function (inputs, exits) {
-    let user = inputs.user;
+  fn: async function ({ user, rol, project, controlAccess}, exits) {
     let token = await jwt.sign({
       id: user.id,
-      email: user.email,
-      rol: inputs.rol,
-      project: inputs.project,
+      grade: user.grade ? user.grade.id || '0' : '0',
+      rol,
+      project,
+      controlAccess
     }, sails.config.custom.jwtKey);
     exits.success(token);
   }

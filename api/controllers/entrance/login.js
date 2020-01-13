@@ -69,7 +69,7 @@ module.exports = {
     await sails.helpers.passwords.checkPassword(inputs.password, user.password)
       .intercept('incorrect', 'badCombo');
 
-    let token = await sails.helpers.createJwt.with({ user, rol, project });
+    let token = await sails.helpers.createJwt.with({ user, rol, project, controlAccess: user.controlAccess || 'no' });
 
     return {
       ...user,

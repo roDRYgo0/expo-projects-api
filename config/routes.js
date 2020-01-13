@@ -15,7 +15,7 @@ module.exports.routes = {
 
   'POST  /login':                             { action: 'entrance/login' },
   'POST /signup':                             { action: 'entrance/signup' },
-  'GET /profile':                            { action: 'profile' },
+  'GET /profile':                             { action: 'profile' },
 
   'POST /student/changePassword':             { action: 'student/change-password' },
 
@@ -29,22 +29,24 @@ module.exports.routes = {
   'POST /filter/getProjects':                 { action: 'project-filter/projects' },
 
   'POST /groupReport':                        { action: 'group-report/create' },
-  'GET /myReport/group':                        { action: 'group-report/my-report' },
+  'GET /myReport/group':                      { action: 'group-report/my-report' },
 
-  'POST /singleReport':                        { action: 'single-report/create' },
-  'GET /myReport/single':                        { action: 'single-report/my-report' },
+  'POST /singleReport':                       { action: 'single-report/create' },
+  'GET /myReport/single':                     { action: 'single-report/my-report' },
 
   'POST /itemGroupReport':                    { action: 'item-group-report/create' },
   'PATCH /itemGroupReport':                   { response: 'notFound' },
   'PUT /itemGroupReport':                     { response: 'notFound' },
   'GET /itemGroupReport':                     { response: 'notFound' },
-  'GET /itemGroupReport/:id':                   { response: 'notFound' },
+  'GET /itemGroupReport/:id':                 { response: 'notFound' },
 
-  'POST /itemSingleReport':                    { action: 'item-single-report/create' },
-  'PATCH /itemSingleReport':                   { response: 'notFound' },
-  'PUT /itemSingleReport':                     { response: 'notFound' },
-  'GET /itemSingleReport':                     { response: 'notFound' },
-  'GET /itemSingleReport/:id':                   { response: 'notFound' },
+  'POST /itemSingleReport':                   { action: 'item-single-report/create' },
+  'PATCH /itemSingleReport':                  { response: 'notFound' },
+  'PUT /itemSingleReport':                    { response: 'notFound' },
+  'GET /itemSingleReport':                    { response: 'notFound' },
+  'GET /itemSingleReport/:id':                { response: 'notFound' },
 
+  'GET /pdf/group':                           { action: 'pdf/group'},
+  'GET /pdf/group/:id':                       { action: 'pdf/group'},
 
 };

@@ -48,5 +48,6 @@ module.exports.policies = {
   'password/*': true,
   'project-filter/*': true,
   'first-admin/*': true,
+  'pdf/*': true,
 
 };
