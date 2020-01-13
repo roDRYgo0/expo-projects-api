@@ -16,13 +16,14 @@ module.exports = {
 
     if (this.req.rol === 'student') {
       user = await Student.findOne(this.req.me)
-      .populate('project')
-      .populate('singleReport');
+      .populate('project');
 
       if (user.project) {
         user.project.grade = await Grade.findOne(user.project.grade) || null;
         user.groupReport = await GroupReport.findOne({project: user.project.id}).populate('items') || null;
       }
+
+      user.singleReport = await SingleReport.findOne({student: user.id}).populate('items') || null;
 
       let qr = btoa(`id:${user.id},project:${user.project ? user.project.id : 'null'}`);
       user.qr =  url.resolve(sails.config.custom.baseUrl,'/set')+'?token='+encodeURIComponent(qr);

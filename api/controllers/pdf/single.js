@@ -13,14 +13,14 @@ var fonts = {
 };
 var printer = new PdfPrinter(fonts);
 
-module.exports = async function group(req, res) {
+module.exports = async function single(req, res) {
 
   let id = req.params.id;
-  let groupReport = null;
+  let student = null;
   let payload = null;
 
   payload = await sails.helpers.verifyJwt.with({ req })
-    .tolerate('invalid');
+  .tolerate('invalid');
 
   if (!payload) {
     return res.badRequest();
@@ -31,7 +31,7 @@ module.exports = async function group(req, res) {
     if (payload.rol !== 'student') {
       return res.badRequest();
     } else {
-      id = payload.project;
+      id = payload.id;
     }
   } else if (payload.rol === 'student') {
     return res.unauthorized();
@@ -41,29 +41,29 @@ module.exports = async function group(req, res) {
     return res.badRequest();
   }
 
-  groupReport = await GroupReport.findOne({project: id})
-    .populate('project')
-    .populate('items');
+  student = await Student.findOne(id)
+  .populate('project');
 
-  if (!groupReport || !groupReport.project.grade) {
+  student.singleReport = await SingleReport.findOne({student: student ? student.id : 0}).populate('items') || null;
+
+  if (!student || !student.singleReport) {
     return res.notFound();
   }
 
   if (payload.rol !== 'admin') {
-    if (payload.rol !== 'student' && payload.controlAccess === 'no' && payload.grade !== groupReport.project.grade) {
+    if (payload.rol !== 'student' && payload.controlAccess === 'no' && payload.grade !== student.project.grade) {
       return res.unauthorized();
     }
   }
 
-  groupReport.project.grade = await Grade.findOne(groupReport.project.grade);
-
-  let pdfContent = await sails.helpers.templateGroup.with({data: groupReport});
+  let pdfContent = await sails.helpers.templateSingle.with({data: student});
 
   let pdfDoc = printer.createPdfKitDocument(pdfContent, null);
-  pdfDoc.pipe(fs.createWriteStream(path.join(__dirname, '../../pdf/group', `${id}.pdf`)));
+  pdfDoc.pipe(fs.createWriteStream(path.join(__dirname, '../../pdf/single', `${id}.pdf`)));
   pdfDoc.end();
 
   await (new Promise(resolve => setTimeout(resolve, 500)));
 
-  return res.sendFile(path.join(__dirname, '../../pdf/group', `${id}.pdf`));
+  return res.sendFile(path.join(__dirname, '../../pdf/single', `${id}.pdf`));
+
 };

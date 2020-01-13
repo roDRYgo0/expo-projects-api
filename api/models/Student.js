@@ -66,9 +66,8 @@ module.exports = {
     },
     singleReport: {
       collection:'singleReport',
-      via: 'student'
-    }
-
+      via: 'student',
+    },
   },
 
 };

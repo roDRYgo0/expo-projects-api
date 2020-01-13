@@ -49,4 +49,7 @@ module.exports.routes = {
   'GET /pdf/group':                           { action: 'pdf/group'},
   'GET /pdf/group/:id':                       { action: 'pdf/group'},
 
+  'GET /pdf/single':                          { action: 'pdf/single'},
+  'GET /pdf/single/:id':                      { action: 'pdf/single'},
+
 };
