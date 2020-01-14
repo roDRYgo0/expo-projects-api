@@ -52,4 +52,6 @@ module.exports.routes = {
   'GET /pdf/single':                          { action: 'pdf/single'},
   'GET /pdf/single/:id':                      { action: 'pdf/single'},
 
+  'GET /observations':                        { response: 'notFound' },
+
 };

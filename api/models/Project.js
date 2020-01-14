@@ -18,17 +18,10 @@ module.exports = {
       required: true,
       unique: true,
     },
-    observations: {
-      type: 'string',
-    },
-    description: {
-      type: 'string',
-      columnType: 'TEXT',
-    },
     state: {
       type: 'string',
-      required: true,
       isIn: ['confirmed', 'canceled'],
+      defaultsTo: 'confirmed'
     },
     grade: {
       model: 'grade',
@@ -36,6 +29,10 @@ module.exports = {
     },
     student: {
       collection:'student',
+      via: 'project'
+    },
+    observations: {
+      collection:'observation',
       via: 'project'
     }
   },
