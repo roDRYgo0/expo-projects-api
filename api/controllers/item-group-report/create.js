@@ -24,24 +24,16 @@ module.exports = {
 
 
   exits: {
-    success: {
-      description: 'New group project was created successfully.'
-    },
-
     invalid: {
       responseType: 'badRequest',
       description: 'The provided coordinatorname, and/or guideteacher are invalid.',
     },
-
-    unauthorized: {
-      responseType: 'unauthorized',
-    }
   },
 
 
   fn: async function ({ name, quantity, entryDatetime }) {
 
-    if (this.req.rol === 'student' && this.req.project) {
+    if (this.req.project) {
       let groupReport = await GroupReport.findOne({project: this.req.project});
 
       if (!groupReport) {
@@ -70,7 +62,7 @@ module.exports = {
       return item;
 
     } else {
-      throw 'unauthorized';
+      throw 'invalid';
     }
 
   }

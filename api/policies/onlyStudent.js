@@ -12,7 +12,7 @@ module.exports = async function (req, res, next) {
         return res.sendStatus(401);
       },
       success: (user) => {
-        if ((user.rol === 'techer' && user.controlAccess === 'si') || user.rol === 'admin') {
+        if (user.rol === 'student') {
           return next();
         } else {
           return res.sendStatus(401);

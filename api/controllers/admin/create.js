@@ -18,9 +18,14 @@ module.exports = {
       isEmail: true,
     },
     password: {
-      required: true,
       type: 'string',
+      required: true,
       maxLength: 200,
+    },
+    controlAccess: {
+      type: 'string',
+      isIn: ['si', 'no'],
+      defaultsTo: 'no'
     },
     grade: {
       type: 'string',
@@ -29,29 +34,24 @@ module.exports = {
 
 
   exits: {
-    success: {
-      description: 'New student account was created successfully.'
-    },
-
     invalid: {
       responseType: 'badRequest',
-      description: 'The provided fullName, password and/or email address are invalid.',
     },
 
     emailAlreadyInUse: {
       statusCode: 409,
-      description: 'The provided email address is already in use.',
     },
   },
 
 
-  fn: async function (inputs) {
+  fn: async function ({ fullName, email, password, controlAccess, grade}) {
 
     let admin = await Admin.create({
-      fullName: inputs.fullName,
-      email: inputs.email,
-      password: await sails.helpers.passwords.hashPassword(inputs.password),
-      grade: inputs.grade || null,
+      fullName,
+      controlAccess,
+      email: email.toLowerCase(),
+      password: await sails.helpers.passwords.hashPassword(password),
+      grade: grade || null,
     })
     .intercept('E_UNIQUE', 'emailAlreadyInUse')
     .intercept({name: 'UsageError'}, 'invalid')

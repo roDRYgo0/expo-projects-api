@@ -10,40 +10,51 @@
 
 module.exports.policies = {
 
-  /***************************************************************************
-  *                                                                          *
-  * Default policy for all controllers and actions, unless overridden.       *
-  * (`true` allows public access)                                            *
-  *                                                                          *
-  ***************************************************************************/
-
-  '*': 'isAuthenticated',
+  '*': 'notFound',
 
   'admin/*': 'isAdmin',
+
   'level/*': 'isAdmin',
+
   'section/*': 'isAdmin',
+
   'specialty/*': 'isAdmin',
 
+  'project/*': 'isAdmin',
+
+  'student/*': 'isAdmin',
+
   Grade: {
+    '*': 'isAdmin',
     find: 'isTeacher',
-    findOne: 'isTeacher',
-    create: 'isAdmin',
-    update: 'isAdmin',
-    destroy: 'isAdmin',
   },
 
-  GroupReport: {
-    find: 'isAdmin',
-    findOne: 'isAdmin',
-    destroy: 'isAdmin',
+  'group-report': {
+    '*': 'isAdmin',
+    create: 'onlyStudent',
+    update: 'onlyStudent',
+    'my-report': 'onlyStudent',
   },
 
-  SingleReport: {
-    find: 'isAdmin',
-    findOne: 'isAdmin',
-    destroy: 'isAdmin',
+  'item-group-report': {
+    create: 'onlyStudent',
+    destroy: 'onlyStudent',
   },
 
+  'single-report': {
+    '*': 'isAdmin',
+    create: 'onlyStudent',
+    'my-report': 'onlyStudent',
+  },
+
+  'item-single-report': {
+    create: 'onlyStudent',
+    destroy: 'onlyStudent',
+  },
+
+  'profile': 'isAuthenticated',
+
+  'pdf/*': true,
   'entrance/*': true,
   'password/*': true,
   'project-filter/*': true,

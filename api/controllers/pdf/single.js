@@ -19,6 +19,14 @@ module.exports = async function single(req, res) {
   let student = null;
   let payload = null;
 
+  let token = req.query.token;
+
+  if (!req.headers.authorization && token) {
+    req.headers.authorization = `Bearer ${token}`;
+  } else if (!req.headers.authorization && !token) {
+    return res.unauthorized();
+  }
+
   payload = await sails.helpers.verifyJwt.with({ req })
   .tolerate('invalid');
 
@@ -41,12 +49,18 @@ module.exports = async function single(req, res) {
     return res.badRequest();
   }
 
-  student = await Student.findOne(id)
+  student = await Student.findOne({ id })
   .populate('project');
+
+  if (!student || !student.project) {
+    return res.notFound();
+  }
+
+  student.project.grade = await Grade.findOne(student.project.grade);
 
   student.singleReport = await SingleReport.findOne({student: student ? student.id : 0}).populate('items') || null;
 
-  if (!student || !student.singleReport) {
+  if (!student.singleReport) {
     return res.notFound();
   }
 

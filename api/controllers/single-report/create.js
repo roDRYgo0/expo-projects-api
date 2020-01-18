@@ -24,16 +24,12 @@ module.exports = {
 
   fn: async function () {
 
-    if (this.req.rol === 'student') {
-      let singleReport = await SingleReport.create({
-        student: this.req.me,
-      })
+    let singleReport = await SingleReport.create({
+      student: this.req.me,
+    })
       .intercept('E_UNIQUE', 'userAlreadyExist')
       .fetch();
-      return singleReport;
-    } else {
-      throw 'unauthorized';
-    }
+    return singleReport;
 
   }
 

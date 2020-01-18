@@ -18,6 +18,7 @@ module.exports = {
     },
     entrydatetime: {
       type: 'number',
+      columnType: 'BIGINT',
       allowNull: true,
     },
     departurename: {
@@ -26,6 +27,7 @@ module.exports = {
     },
     departuredatetime: {
       type: 'number',
+      columnType: 'BIGINT',
       allowNull: true,
     },
     student: {

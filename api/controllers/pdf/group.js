@@ -19,6 +19,14 @@ module.exports = async function group(req, res) {
   let groupReport = null;
   let payload = null;
 
+  let token = req.query.token;
+
+  if (!req.headers.authorization && token) {
+    req.headers.authorization = `Bearer ${token}`;
+  } else if (!req.headers.authorization && !token) {
+    return res.unauthorized();
+  }
+
   payload = await sails.helpers.verifyJwt.with({ req })
     .tolerate('invalid');
 

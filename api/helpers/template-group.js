@@ -146,7 +146,7 @@ module.exports = {
                   border: [true, false, true, true],
                   text:[
                     {text:'Justificación de ingreso de material o producto alimenticio:', bold: true},
-                    `\n${data.justification}`
+                    `\n${data.justification || ''}`
                   ]
                 }
               ]

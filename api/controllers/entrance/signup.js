@@ -28,10 +28,6 @@ module.exports = {
 
 
   exits: {
-    success: {
-      description: 'New student account was created successfully.'
-    },
-
     invalid: {
       responseType: 'badRequest',
       description: 'The provided fullName, password and/or email address are invalid.',
@@ -44,14 +40,20 @@ module.exports = {
   },
 
 
-  fn: async function (inputs) {
+  fn: async function ({ fullName, carnet, project, password}) {
 
-    let student = await Student.create(_.extend({
-      fullName: inputs.fullName,
-      carnet: inputs.carnet,
-      email: inputs.carnet + sails.config.custom.extensionEmailStudents,
-      project: inputs.project,
-      password: await sails.helpers.passwords.hashPassword(inputs.password),
+    let _project = await Project.findOne({id: project});
+
+    if (!_project) {
+      throw 'invalid';
+    }
+
+    await Student.create(_.extend({
+      fullName,
+      carnet,
+      email: carnet + sails.config.custom.extensionEmailStudents,
+      project,
+      password: await sails.helpers.passwords.hashPassword(password),
     }, sails.config.custom.verifyEmailAddresses? {
       emailProofToken: await sails.helpers.strings.random('url-friendly'),
       emailProofTokenExpiresAt: Date.now() + sails.config.custom.emailProofTokenTTL,

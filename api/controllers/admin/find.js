@@ -12,14 +12,14 @@ module.exports = {
     let users = await Admin.find();
 
     return {
+      admins: users.filter(user => !user.grade),
       teachers: await Promise.all(
         users.filter(user => user.grade)
           .map(async user => {
-            user.grade = await Grade.findOne(user.grade);
+            user.grade = await Grade.findOne(user.grade) || 'notFound';
             return user;
-          }),
+          })
       ),
-      admins: users.filter(user => !user.grade),
     };
 
   }
