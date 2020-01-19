@@ -57,6 +57,15 @@ module.exports = {
     .intercept({name: 'UsageError'}, 'invalid')
     .fetch();
 
+    if (admin.grade) {
+      let projectsId = (await Project.find({grade: admin.grade})).map(project => project.id);
+      console.log(projectsId);
+      await GroupReport.updateOne({ project: { in: projectsId }})
+        .set({
+          guideteacher: admin.fullName
+        });
+    }
+
     return admin;
 
   }

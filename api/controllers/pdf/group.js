@@ -34,15 +34,16 @@ module.exports = async function group(req, res) {
     return res.badRequest();
   }
 
-  if (!id) {
-
+  if (id) {
+    if (payload.rol === 'student' || (payload.rol === 'teacher' && payload.controlAccess === 'no') ) {
+      return res.unauthorized();
+    }
+  } else {
     if (payload.rol !== 'student') {
       return res.badRequest();
     } else {
       id = payload.project;
     }
-  } else if (payload.rol === 'student') {
-    return res.unauthorized();
   }
 
   if (isNaN(+id)) {
@@ -53,12 +54,12 @@ module.exports = async function group(req, res) {
     .populate('project')
     .populate('items');
 
-  if (!groupReport || !groupReport.project.grade) {
+  if (!groupReport || !groupReport.project || !groupReport.project.grade) {
     return res.notFound();
   }
 
-  if (payload.rol !== 'admin') {
-    if (payload.rol !== 'student' && payload.controlAccess === 'no' && payload.grade !== groupReport.project.grade) {
+  if (payload.rol === 'teacher') {
+    if (payload.controlAccess === 'no' && payload.grade !== groupReport.project.grade) {
       return res.unauthorized();
     }
   }
