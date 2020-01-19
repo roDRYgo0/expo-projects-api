@@ -31,6 +31,10 @@ module.exports = {
       collection:'student',
       via: 'project'
     },
+    groupReport: {
+      collection:'groupReport',
+      via: 'project'
+    },
     observations: {
       collection:'observation',
       via: 'project'

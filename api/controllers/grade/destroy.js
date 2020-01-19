@@ -21,15 +21,23 @@ module.exports = {
     },
     conflict: {
       statusCode: 409,
-      description: 'there are associated users',
+      description: 'there are associated projects or admins',
     }
   },
 
 
   fn: async function ({ id }, exits) {
 
-    // All done.
-    return;
+    let projects = await Project.find({grade: id});
+    let admins = await Admin.find({grade: id});
+
+    if (projects.length || admins.length) {
+      throw 'conflict';
+    }
+
+    let grade = await Grade.destroyOne({id: id}) || null;
+
+    return grade ? exits.success(grade) : exits.notFound();
 
   }
 

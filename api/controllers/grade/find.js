@@ -12,11 +12,13 @@ module.exports = {
     let grades = await Grade.find()
       .populate('level')
       .populate('specialty')
-      .populate('section');
+      .populate('section')
+      .sort('createdAt ASC');
 
     return await Promise.all(grades.map(async grade => {
       grade.projects = await Project.find({grade: grade.id})
-        .populate('observations');
+        .populate('observations')
+        .populate('groupReport');
       return grade;
     }));
 

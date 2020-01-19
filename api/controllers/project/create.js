@@ -38,9 +38,13 @@ module.exports = {
 
   fn: async function ({ name, projectId, state, grade}) {
 
-    return await Project.create({name, projectId, state, grade})
+    let project = await Project.create({name, projectId, state, grade})
       .intercept('E_UNIQUE', 'projectIdAlreadyInUse' )
       .fetch();
+
+    return await Project.findOne({id: project.id})
+      .populate('observations')
+      .populate('groupReport');
 
   }
 

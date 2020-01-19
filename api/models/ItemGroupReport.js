@@ -17,8 +17,7 @@ module.exports = {
       required: true,
     },
     entryDatetime: {
-      type: 'number',
-      columnType: 'BIGINT',
+      type: 'string',
       required: true,
     },
     groupReport: {

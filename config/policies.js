@@ -52,6 +52,11 @@ module.exports.policies = {
     destroy: 'onlyStudent',
   },
 
+  Observation: {
+    create: 'hasAccess',
+    destroy: 'hasAccess',
+  },
+
   'profile': 'isAuthenticated',
 
   'pdf/*': true,
