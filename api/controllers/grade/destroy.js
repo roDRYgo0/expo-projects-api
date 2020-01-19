@@ -4,7 +4,7 @@ module.exports = {
   friendlyName: 'Destroy',
 
 
-  description: 'Destroy group report.',
+  description: 'Destroy grade.',
 
 
   inputs: {
@@ -18,17 +18,18 @@ module.exports = {
   exits: {
     notFound: {
       responseType: 'notFound',
+    },
+    conflict: {
+      statusCode: 409,
+      description: 'there are associated users',
     }
   },
 
 
   fn: async function ({ id }, exits) {
 
-    await ItemGroupReport.destroy({groupReport: id});
-
-    let report = await GroupReport.destroyOne({id: id}) || null;
-
-    return report ? exits.success(report) : exits.notFound();
+    // All done.
+    return;
 
   }
 
