@@ -32,6 +32,7 @@ module.exports = {
     },
     grade: {
       model: 'grade',
+      unique: true,
     },
     passwordResetToken: {
       type: 'string',

@@ -25,6 +25,9 @@ module.exports = {
     },
     grade: {
       type: 'string',
+    },
+    password: {
+      type: 'string',
     }
   },
 
@@ -51,6 +54,18 @@ module.exports = {
       })
       .intercept('E_UNIQUE', 'emailAlreadyInUse')
       .intercept({name: 'UsageError'}, 'invalid');
+
+    if (admin.grade) {
+      let projectsId = (await Project.find({grade: admin.grade})).map(project => project.id);
+
+      await GroupReport.update({ project: { in: projectsId }})
+        .set({
+          guideteacher: admin.fullName
+        });
+    }
+
+    admin = await Admin.findOne(admin.id)
+      .populate('grade');
 
     return admin;
 

@@ -37,6 +37,7 @@ module.exports = {
     let reportsId = (await GroupReport.destroy({project: id}).fetch()).map(x => x.id);
 
     await ItemGroupReport.destroy({ groupReport: { in: reportsId}});
+    await Observation.destroy({ project: id});
 
     let project = await Project.destroyOne({id: id}) || null;
 

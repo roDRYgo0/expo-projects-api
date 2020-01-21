@@ -59,12 +59,15 @@ module.exports = {
 
     if (admin.grade) {
       let projectsId = (await Project.find({grade: admin.grade})).map(project => project.id);
-      console.log(projectsId);
-      await GroupReport.updateOne({ project: { in: projectsId }})
+
+      await GroupReport.update({ project: { in: projectsId }})
         .set({
           guideteacher: admin.fullName
         });
     }
+
+    admin = await Admin.findOne(admin.id)
+      .populate('grade');
 
     return admin;
 
