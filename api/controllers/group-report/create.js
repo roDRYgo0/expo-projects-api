@@ -29,7 +29,6 @@ module.exports = {
 
 
   fn: async function ({ coordinatorname }) {
-
     let groupReport = await GroupReport.create({
       coordinatorname,
       guideteacher: 'notFound',
